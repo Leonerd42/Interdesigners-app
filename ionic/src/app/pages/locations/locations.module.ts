@@ -22,7 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDGY_3imVngHdJBu3Xcftt64gTTFOydUps'
+      apiKey: 'API_DO_GOOGLE_MAPS'
     })
   ],
   declarations: [
