@@ -1,0 +1,36 @@
+<ion-card [ngClass]="{
+    'oficina': evento.Tipo.valueOf().toLowerCase() === eventos[2].valueOf().toLowerCase(),
+    'conversa': evento.Tipo.valueOf().toLowerCase() === eventos[3].valueOf().toLowerCase(),
+    'institucional': evento.Tipo.valueOf().toLowerCase() === eventos[1].valueOf().toLowerCase(),
+    'expressao': evento.Tipo.valueOf().toLowerCase() === eventos[4].valueOf().toLowerCase(),
+    'palestra': evento.Tipo.valueOf().toLowerCase() === eventos[6].valueOf().toLowerCase(),
+    'other': evento.Tipo.valueOf().toLowerCase() === 'bazar' || evento.Tipo.valueOf().toLowerCase() === 'festa' 
+             || evento.Name.valueOf().toLowerCase().split(' ')[0] === 'plenária'}">
+  <ion-grid>
+    <ion-row>
+      <ng-container>
+        <ion-col size="10" class="pt-2" (click)="OpenDescription(evento.Id)">
+            <h2 class="eventName"> {{ evento.Name }} </h2>
+        </ion-col>
+        <!-- <ion-col class="eventHour" size="2" class="pt-2" (click)="OpenDescription(evento.Id)">
+          <h2> {{ evento.Hora_inicial }}h {{ evento.Minuto_inicial != 0 ? evento.Minuto_inicial : '' }} </h2>
+        </ion-col> -->
+      </ng-container>
+      <ng-container>
+        <ion-col size="2" (click)="ToggleFavorite(evento.Id)">
+          <div *ngIf="evento.Favorito === false; then notMarked else Marked" ></div>
+          <ng-template #notMarked> <ion-icon class="starFavorite" name="ios-star-outline"></ion-icon> </ng-template>
+          <ng-template #Marked> <ion-icon class="starFavorite" name="ios-star" ></ion-icon>  </ng-template>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+  <ion-card-content>
+    <h5 class=""> {{ evento.Tipo }} </h5>
+    <p *ngIf="evento.Responsavel != null" class="by"> Por: {{ evento.Responsavel }} </p>
+    <p class="eventHourComplete" >Horario: {{evento.Hora_inicial}}h{{evento.Minuto_inicial != 0 ? evento.Minuto_inicial : ''}} <ion-icon class="hourArrow" ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon> {{evento.Hora_final}}h{{evento.Minuto_final != 0 ? evento.Minuto_final : ''}} </p>
+    <p class="eventLocal" > Local: {{ evento.Local }} </p>
+    
+
+  </ion-card-content>
+</ion-card>

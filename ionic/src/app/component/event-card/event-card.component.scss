@@ -1,0 +1,60 @@
+ion-card {
+    background: #e0e2d4;
+    border-radius: 0;
+}
+
+.eventName{
+    font-size: 18px;
+    color: black;
+}
+
+.eventHour{
+    font-size: 12px;
+}
+
+.eventName, ion-card-content, .eventHourComplete, .eventLocal, .by{
+    color: white;        
+}
+
+.oficina {
+    background: #99CCFF!important;
+}
+.conversa {
+    background: #82E075!important;
+}
+.institucional {
+    background: #FF99CC!important;
+}
+.expressao {
+    background: #EEB16E!important;
+}
+.palestra {
+    background: #CB9BCD!important;
+}
+.other{
+    background: #f28c7d!important;
+}
+
+ion-row {
+    align-items: first;
+}
+
+ion-card-content{
+    padding: 1rem 0.5rem;
+}
+
+.starFavorite{
+    font-size: 30px;
+}
+
+.hourArrow{
+    font-size: 18px;
+    margin-bottom: -5px;
+}
+
+h2 {
+    margin: 0;
+}
+.pt-2 {
+    padding-top: 2px;
+}

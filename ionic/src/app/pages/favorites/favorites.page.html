@@ -1,0 +1,29 @@
+<!-- Página de favoritos, aqui deve aparecer somente os eventos que foram 
+favoritados pelo usuario na página de proramação  -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Favoritos
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <xscroll (ChangeDay)="listaEventos(+$event)"></xscroll>
+    <ng-container *ngFor="let event of events">
+        <ng-container>
+            <event-card (Favorite)="ToggleFavoriteSchedulePage($event)" [evento]="event"></event-card>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="events.length == 0">
+        <div class="container text-center text-muted noFavorite">
+            <p> Sem favoritos salvos nesse dia! </p>
+            <span>   
+                <ion-icon name="sad"></ion-icon>
+            </span>
+        </div>
+    </ng-container>
+</ion-content>

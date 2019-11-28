@@ -1,0 +1,7 @@
+{
+  "name": "InterD",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

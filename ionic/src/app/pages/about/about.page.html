@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Sobre
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="content">
+
+    <h2> InterDesigners </h2>
+    <p>
+      O Interdesigners é a semana acadêmica do curso de Design da Unesp de Bauru. Desde 1991, o evento dedica-se a disseminar conhecimentos na área do Design por meio de atividades culturais e acadêmicas, promovendo integração entre os estudantes, criando uma rede de troca de vivências e experiências e valorizando o Design enquanto profissão.
+    </p>
+
+
+    <div text-center>
+    <ion-button color="dark" (click)="noclick()">Saiba Mais</ion-button>
+
+    </div>
+
+      <div class="saibamais" *ngIf="botao">
+
+        <p>O Interdesigners <strong>Conecta</strong> é a 20ª edição do encontro e acontecerá nos dias 7 a 11 de Outubro de 2019. O conceito do encontro, conexão, se relaciona com interação, criação de laços, links e integração, que servirá como uma rede de apoio para aumentar a criatividade e um sentimento de pertencimento e assim aumentar a troca de experiências.
+        <br></p>
+        <p> Há, ainda, outros eventos que compõe o Interdesigners Conecta 2019, como:
+        </p>
+        <ul>
+          <li>6º Simpósio Interdesigners – Conectando Interdisciplinaridade e Tecnologia</li>
+          <li>Feira Maker</li>
+          <li>Festas & Entretenimento</li>
+        </ul>
+      </div>
+
+  </div>
+
+<div text-center margin-top="20%" class="logos">
+
+    <!-- Parcerias -->
+    <h4> Parceiros </h4>
+    <a [href]="parceiro.url" *ngFor="let parceiro of parceirosA">
+      <img class="imgA" [src]="parceiro.src" alt="">
+      <p><br></p>
+    </a>
+
+    <a [href]="parceiro.url" *ngFor="let parceiro of parceiros">
+      <img class="imgB" [src]="parceiro.src" alt="">
+    </a>
+
+    <!-- Apoiadores -->
+    <h4> Apoio </h4>
+    <a [href]="apoio.url" *ngFor="let apoio of apoios">
+      <img class="imgC" [src]="apoio.src" alt="">
+    </a>
+
+    <!-- Realizadores -->
+    <h4> Relização </h4>
+    <a [href]="realizacao.url" *ngFor="let realizacao of realizadores">
+      <img  class="imgA" [src]="realizacao.src" alt="">
+    </a>
+
+    <!-- Desenvolvedoroes -->
+    <h4> Desenvolvido por </h4>
+
+    <a [href]="desenvolvedor.url" *ngFor="let desenvolvedor of desenvolvedores">
+      <img class="figure-img imgA" [src]="desenvolvedor.src" alt="">
+    </a>
+
+</div>
+
+
+</ion-content>
+

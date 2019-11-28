@@ -1,0 +1,171 @@
+<nav class="navbar navbar-dark bg-dark">
+  <span class="navbar-brand mb-0 h1"> InterDesigners - Conecta - Avisos </span>
+</nav>
+
+<div class="">
+  <div class="card m-3">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item" (click)="TrocarSelected(1);" >
+          <a class="nav-link" [ngClass]="{active: Selected == 1}"
+           > Enviar Aviso  </a>
+        </li>
+        <li class="nav-item" (click)="TrocarSelected(2);">
+          <a class="nav-link" [ngClass]="{active: Selected == 2}" 
+           > Avisos enviados </a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="sendWarning" *ngIf="Selected == 1" >
+          <h3 class="card-title"> 
+             Enviar Aviso  </h3>  
+          <div class="alert alert-success" *ngIf="warningSucess"> Aviso enviado com sucesso!! </div>
+          <div class="alert alert-warning" *ngIf="warningFailure"> Existem campos obrigatórios não preenchidos! </div>
+          <div class="alert alert-danger" *ngIf="warningPasswordWrong"> Senha Incorreta! </div>
+
+          <div class="row">
+            <div class="col-12 col-md-8">
+              <form action="">
+                <div class="form-group">
+                  <label for=""> Tipo de aviso </label>
+                  <input type="text" class="form-control" placeholder="cancelamento, troca de horario..."
+                  [(ngModel)]="typeEvent" [ngModelOptions]="{standalone: true}" >
+                </div>
+                <div class="form-group">
+                  <label for="Titulo"> Titulo da mensagem * </label>
+                  <input type="text" class="form-control" required
+                  [(ngModel)]="titleMsg" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="form-group">
+                  <label for=""> Evento afetado </label>
+                  <input type="text" class="form-control" 
+                  [(ngModel)]="EventAffected" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="form-group">
+                  <label for="msg"> Corpo da mensagem * </label>
+                  <textarea rows='8' class="form-control" required
+                  [(ngModel)]="message" [ngModelOptions]="{standalone: true}">
+                  </textarea>
+                </div>
+                <div class="form-group">
+                  <label for="" class="mr-2"> Nível de importância:  </label>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input"
+                      [value]="'normal'" [(ngModel)]="importancyLevel" [ngModelOptions]="{standalone: true}">
+                      <label class="custom-control-label" for="customRadioInline1"> <span class="badge badge-success"> Normal </span>  </label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input"
+                      [value]="'important'" [(ngModel)]="importancyLevel" [ngModelOptions]="{standalone: true}">
+                      <label class="custom-control-label" for="customRadioInline2"> <span class="badge badge-warning"> Importante </span>  </label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input"
+                      [value]="'urgent'" [(ngModel)]="importancyLevel" [ngModelOptions]="{standalone: true}">
+                      <label class="custom-control-label" for="customRadioInline3"> <span class="badge badge-danger"> Urgente </span>  </label>
+                    </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label for=""> Senha para o envio: * </label>
+                <input type="password" class="form-control" required 
+                [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+              </div>
+              <h5 class="card-title text-center"> Visualizar mensagem </h5>
+              <div class="card">
+                <div *ngIf="typeEvent != undefined || titleMsg != undefined || EventAffected != undefined || message != undefined; else ExampleCard" >
+                  <div class="card-header" *ngIf="typeEvent != undefined"
+                  [ngClass]="{'text-white bg-success': importancyLevel == 'normal', 
+                  'text-white bg-warning': importancyLevel == 'important', 'text-white bg-danger': importancyLevel == 'urgent'}">
+                    {{ typeEvent }}                  
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title" *ngIf="titleMsg != undefined"> 
+                      {{ titleMsg }} 
+                    </h4>
+                    <h6 class="card-subtitle mb-2 text-muted" *ngIf="EventAffected != undefined">
+                      {{ EventAffected }}
+                    </h6>
+                    <p class="card-text" style="border-top: 1px solid gray" *ngIf="message != undefined">
+                      {{ message }}
+                    </p>
+                  </div>
+                </div>
+                <ng-template #ExampleCard> <!-- Caso não haja nada digitado -->
+                  <div class="card-header"  [ngClass]="{'text-white bg-success': importancyLevel == 'normal', 
+                  'text-white bg-warning': importancyLevel == 'important', 'text-white bg-danger': importancyLevel == 'urgent'}"> Digite o seu aviso!! </div>
+                  <div class="card-body">
+                    <p class="card-text"> Aqui vai o conteúdo do seu aviso </p>
+                  </div>
+                </ng-template>
+              </div>
+              <div class="d-flex justify-content-center">
+                <div class="spinner-border text-success m-5" style="width: 4rem; height: 4rem;" role="status"
+                *ngIf="loading">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div> <!-- Fim da linha -->
+          
+          <div class="alert alert-success" *ngIf="warningSucess"> Aviso enviado com sucesso!! </div>
+          <button class="btn btn-primary btn-block btn-full" (click)="SendMessage()" > Enviar </button>
+      </div>
+
+      <div class="listOfWarnings" *ngIf="Selected == 2" >
+          <div class="alert alert-success" *ngIf="deletedSucess"> Aviso deletado com sucesso! </div>
+          <div class="alert alert-danger" *ngIf="warningPasswordWrong"> Senha Incorreta! </div>
+          <h5 class="card-title"> Lista de avisos </h5>
+          <div class="group">
+            <label for=""> Senha: </label>
+            <input type="password" class="form-control mb-2" [(ngModel)]="password">
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col"> Tipo Aviso </th>
+                  <th scope="col"> Titulo </th>
+                  <!-- <th scope="col"> Data de envio: </th>
+                  <th scope="col"> Hora de envio: </th> -->
+                  <th scope="col"> Evento </th>
+                  <th scope="col"> Ação </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let w of arrayWarnings">
+                  <tr *ngIf="w.visible == false" [ngClass]="{'bg-danger text-white': w.visible == false}">
+                    <td rowspan='2' > 
+                        {{ w.warningID }}
+                    </td>
+                    <td colspan='4' class="text-center">
+                       Evento Excluido!!
+                    </td>
+                  </tr>
+                  <tr 
+                  [ngClass]="{'table-success': w.importancia == 'normal', 
+                  'table-warning':  w.importancia == 'important', 'table-danger':  w.importancia == 'urgent',
+                  'avisoDeletado': w.visible == false}">
+                    <td *ngIf="w.visible == true"> {{ w.warningID }} </td>
+                    <td> {{ w.tipo }} </td>
+                    <td> {{ w.titulo }} </td>
+                    <!-- <td> hora 12 </td>
+                    <td> Titulo x </td> -->
+                    <td> {{ w.evento }} </td>
+                    <td> <button [disabled]="w.visible == false" class="btn" [ngClass]="{'btn-light text-black': w.importancia == 'urgent', 'btn-danger': w.importancia != 'urgent'}"
+                    (click)="Delete(w.warningID)" ><i class="fas fa-times"></i> </button>  </td>
+                  </tr>
+                  
+                </ng-container>
+                
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

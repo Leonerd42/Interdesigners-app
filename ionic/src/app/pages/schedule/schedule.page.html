@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Programação</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <xscroll (ChangeDay)="listaEventos(+$event)"></xscroll>
+    <ng-container *ngFor="let dado of events">
+        <ng-container>
+            <event-card (Favorite)="ToggleFavoriteSchedulePage($event)" [evento]="dado"> </event-card>
+        </ng-container>
+    </ng-container>
+</ion-content>

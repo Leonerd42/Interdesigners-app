@@ -1,0 +1,19 @@
+<div class="filter center justify-content">
+    <ng-container *ngFor="let day of dates, let i = index" justify-content center>
+        <div class="day" (click)="SelectedDate(day)" >
+            <div class="day-name">
+            {{ daysofWeek[i] }}
+            </div>
+            <div class="day-number">
+                <ion-fab class="selected" center middle *ngIf="day == selectedDate; else notSelected">
+                    {{ day }}
+                </ion-fab>
+                <ng-template center middle #notSelected>
+                    <ion-fab>
+                        {{ day }}
+                    </ion-fab>
+                </ng-template>
+            </div>
+        </div>
+    </ng-container>
+</div>
